@@ -17,6 +17,7 @@ include ../../Makefile.properties
 
 deploy: env creds
 	kubectl apply -f "$(BASEDIR)/ingress.yaml"
+	kubectl apply -f "$(BASEDIR)/rbac.yaml"
 
 deploy.minikube: 
 	kubectl apply -f "$(BASEDIR)/ingress.minikube.yaml"	
