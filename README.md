@@ -43,7 +43,7 @@ better yet, accept a pull request.)
 1. From GCP Project console, the GCP cloud shell can be opened with a button click
 1. On this shell, the GCP Service account user can be activated by running the following command:
 `gcloud auth activate-service-account [SERVICE ACCOUNT USER ID CREATED EARLIER] --key-file=[PATH TO JSON KEYFILE] --project=[PROJECT ID]`
-* The JSON keyfile should be created on the machine where the shell is running using the key file that was downloaded while Service account creation.
+    * The JSON keyfile should be created on the machine where the shell is running using the key file that was downloaded while Service account creation.
 1. The GIT repo containing the code can now be cloned using the `git clone [GIT CLONE URL]`
 
 
