@@ -32,9 +32,22 @@ better yet, accept a pull request.)
 1. Create Project in Cloud Console
 1. Navigate to Compute Engine (to activate Compute Engine service)
 1. Navigate to the API Library and activate Container Builder API
+1. Navigate to IAM & Admin -> Service Accounts and create a new Service account with below permissions and generate a JSON key:
+     * Compute Admin
+     * Kubernetes Engine Admin
+     * Service Account User
+     * Storage Admin
+     
+
+### Setting up GCP Cloud Shell
+1. From GCP Project console, the GCP cloud shell can be opened with a button click
+1. On this shell, the GCP Service account user can be activated by running the following command:
+`gcloud auth activate-service-account [SERVICE ACCOUNT USER ID CREATED EARLIER] --key-file=[PATH TO JSON KEYFILE] --project=[PROJECT ID]`
+* The JSON keyfile should be created on the machine where the shell is running using the key file that was downloaded while Service account creation.
+1. The GIT repo containing the code can now be cloned using the `git clone [GIT CLONE URL]`
 
 
-### Create Configs 
+### Set Configs 
 1. Make a copy of `/Samples.properties`, renamed to `/Makefile.properties`
 1. Alter value for `PROJECT` to your project id
 1. Alter `ZONE` and `REGION` if you want to run this demo in a particular area.
@@ -42,16 +55,7 @@ better yet, accept a pull request.)
 `whack-a-pod`.
 1. Set `INGRESSNAME` if you need to use something other than the default. 
 1. Set `DOCKERREPO` if you need to use something other Google Container Registry. 
-1. Open a terminal in `/`.
-1. Run `make config` to create your ingress file. 
-1. This should create the following file:
-     1. /apps/ingress/ingress.yaml
 
-
->I use this application to show off Google Cloud Platform, so I tend set it up
-multiple times, once per region or datacenter. Therefore, I rename the `INGRESSNAME` and
-`CLUSTER` a bunch. If you only have one cluster, you don't have to fiddle with 
-these. 
 
 ### Build Infrastructure
 1. Open a terminal in `/infrastructure/`.
@@ -64,7 +68,20 @@ these.
 message=Project projectname is not fully initialized with the default service
 accounts. Please try again later.` You need to navigfate to Compute Engine in
 Google Cloud console to activate Compute Engine service.
+> If you get an error about GO missing library `mux`, run the following command on the shell:
+`go get github.com/gorilla/mux`
 
+### Make Configs
+1. Open a terminal in `/`.
+1. Run `make config` to create your ingress file. 
+1. This should create the following file:
+     1. /apps/ingress/ingress.yaml
+
+
+>I use this application to show off Google Cloud Platform, so I tend set it up
+multiple times, once per region or datacenter. Therefore, I rename the `INGRESSNAME` and
+`CLUSTER` a bunch. If you only have one cluster, you don't have to fiddle with 
+these. 
      
 
 ### Build Application
